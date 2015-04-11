@@ -1,16 +1,20 @@
 package com.another.pooling;
 
 import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
-public class CarPoolingActivity extends ActionBarActivity {
+public class CarPoolingActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_car_pooling);
+		
 	}
 
 	@Override

@@ -12,16 +12,18 @@ import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 import cn.bmob.v3.listener.SaveListener;
 import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class BillInfoActivity extends ActionBarActivity implements AMapLocationListener {
+public class BillInfoActivity extends Activity implements AMapLocationListener {
 	
 	private EditText decribe;
 	private EditText deadline;
@@ -38,6 +40,7 @@ public class BillInfoActivity extends ActionBarActivity implements AMapLocationL
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_bill_info);
 		
 		Bmob.initialize(this, "dc417cd048f5197ba699440c13977f34");

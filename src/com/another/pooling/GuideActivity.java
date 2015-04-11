@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 import android.R.integer;
 import android.R.layout;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,7 +24,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ImageView.ScaleType;
 
-public class GuideActivity extends ActionBarActivity{
+public class GuideActivity extends Activity{
 	
 	private View view1, view2, view3, view4;
 	private ViewPager mViewPager;
@@ -35,7 +36,7 @@ public class GuideActivity extends ActionBarActivity{
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		getSupportActionBar().hide();
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_guide);
 		initView();
 	}

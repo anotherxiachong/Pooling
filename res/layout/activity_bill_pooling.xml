@@ -23,17 +23,12 @@
                 android:orientation="vertical"
                 android:background="#FFFFFF">
                 
-                <include layout="@layout/top" />
+                <Button 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Post"
+                    android:onClick="post"/>
                 
-                <FrameLayout 
-                     android:id="@+id/id_content"
-                     android:layout_width="fill_parent"
-                     android:layout_height="0dp"
-                     android:layout_weight="1">
-                    
-                </FrameLayout>
-                
-                <include layout="@layout/bottom" />
               
                 
             </LinearLayout>
