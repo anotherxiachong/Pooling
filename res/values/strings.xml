@@ -13,5 +13,6 @@
     <string name="title_activity_setting">SettingActivity</string>
     <string name="title_activity_demo_ssss">DemoSSSSActivity</string>
     <string name="title_activity_bill_info">BillInfoActivity</string>
+    <string name="title_activity_cities">CitiesActivity</string>
 
 </resources>

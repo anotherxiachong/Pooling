@@ -2,17 +2,23 @@ package com.another.pooling;
 
 
 
+import java.util.List;
+
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 
 import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.datatype.BmobGeoPoint;
+import cn.bmob.v3.listener.FindListener;
 import cn.bmob.v3.listener.SaveListener;
 import android.support.v7.app.ActionBarActivity;
+import android.R.integer;
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,9 +38,14 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 	private BmobGeoPoint mBmobGeoPoint;
 	private EditText link;
 	private EditText address;
+	private EditText detailaddress;
 	
+
+
 	LocationManagerProxy mLocationManagerProxy;
 	//private AMapLocation mAMapLocation;
+	
+	//String[] mProvinceDatas;
 
 
 	@Override
@@ -49,12 +60,20 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 		deadline = (EditText) findViewById(R.id.deadline);
 		link = (EditText) findViewById(R.id.link);
 		address = (EditText) findViewById(R.id.online_address);
+		detailaddress = (EditText) findViewById(R.id.offline_address);
 		
 		
 		mLocationManagerProxy = LocationManagerProxy.getInstance(this);
 	    mLocationManagerProxy.requestLocationData(LocationProviderProxy.AMapNetwork,-1, 15, this);
+	    
+	    address.setText(BillInfoActivity.this.getIntent().getExtras().getString("address"));
 		
 
+	}
+	
+	public void input(View view) {
+		Intent intent  = new Intent(this, CitiesActivity.class);
+		startActivity(intent);
 	}
 	
 	
@@ -66,6 +85,7 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 		String deadlineString = deadline.getText().toString();
 		String linkString = link.getText().toString();
 		String addressString = address.getText().toString();
+		String detailAddresString = detailaddress.getText().toString();
 		mBmobGeoPoint = new BmobGeoPoint(longitude, latitude);
 		
 		BillInfo mBillInfo = new BillInfo();

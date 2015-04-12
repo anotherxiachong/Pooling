@@ -35,7 +35,7 @@
             android:text="描述"/>
         
         <EditText 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/describe"
             android:hint="商品描述"
@@ -54,7 +54,7 @@
             android:text="商品链接"/>
         
         <EditText 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/link"/>
     
@@ -71,7 +71,7 @@
             android:text="截止时间"/>
         
         <EditText 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/deadline"/>
     
@@ -88,7 +88,7 @@
             android:text="收货地址"/>
         
         <EditText 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/online_address"/>
     
@@ -102,10 +102,10 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="商店地址"/>
+            android:text="详细地址"/>
         
         <EditText 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/offline_address"/>
     
@@ -122,7 +122,7 @@
             android:text="标签"/>
         
         <EditText 
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tabs"/>
     
@@ -137,13 +137,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="发布"
+            android:layout_weight="1"
             android:onClick="post"/>
         
         <Button 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="取消"
+            android:layout_weight="1"
             android:onClick="cancel"/>
+
+        <Button
+            android:id="@+id/inputaddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="填写收货地址"
+            android:layout_weight="1"
+            android:onClick="input" />
     
     </LinearLayout>
     

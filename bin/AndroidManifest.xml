@@ -51,6 +51,10 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
+         <activity
+            android:name=".CitiesActivity"
+            android:label="@string/title_activity_cities" >
+        </activity>
         <activity
             android:name=".SettingActivity"
             android:label="@string/title_activity_setting" >

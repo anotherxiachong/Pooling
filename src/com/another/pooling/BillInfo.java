@@ -14,9 +14,12 @@ public class BillInfo extends BmobObject {
 	BmobGeoPoint position;//
 	String link;//
 	String address;//
+	String detailaddress;
 	ArrayList<String> tabs;
 	Boolean classes;
 	ArrayList<String> followman;
+	
+	
 	
 	public String getUsername() {
 		return username;
@@ -60,6 +63,12 @@ public class BillInfo extends BmobObject {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getDetailaddress() {
+		return detailaddress;
+	}
+	public void setDetailaddress(String detailaddress) {
+		this.detailaddress = detailaddress;
 	}
 	public ArrayList<String> getTabs() {
 		return tabs;
