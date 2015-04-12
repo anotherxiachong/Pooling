@@ -85,6 +85,8 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 	 * 当前街道的名称
 	 */
 	private String mCurrentStreetName ="";
+	
+	private String classes;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -94,7 +96,7 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 		
 		Bmob.initialize(this, "dc417cd048f5197ba699440c13977f34");
 		
-		
+		classes = getIntent().getExtras().getString("classes");
 
 		//initJsonData();
 
@@ -374,11 +376,19 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 
 	public void sure(View view)
 	{
-		Intent intent = new Intent(CitiesActivity.this, BillInfoActivity.class);
-		Bundle address = new Bundle();
-		address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
-		intent.putExtras(address);
-		startActivity(intent);
+		if(classes.equals("post")) {
+			Intent intent = new Intent(CitiesActivity.this, BillInfoActivity.class);
+			Bundle address = new Bundle();
+			address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
+			intent.putExtras(address);
+			startActivity(intent);
+		} else if(classes.equals("search")) {
+			Intent intent = new Intent(CitiesActivity.this, SearchActivity.class);
+			Bundle address = new Bundle();
+			address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
+			intent.putExtras(address);
+			startActivity(intent);
+		}
 		//Toast.makeText(this, mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName, 1).show();
 	}
 }

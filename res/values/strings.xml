@@ -14,5 +14,7 @@
     <string name="title_activity_demo_ssss">DemoSSSSActivity</string>
     <string name="title_activity_bill_info">BillInfoActivity</string>
     <string name="title_activity_cities">CitiesActivity</string>
+    <string name="title_activity_near">NearActivity</string>
+    <string name="title_activity_search">SearchActivity</string>
 
 </resources>

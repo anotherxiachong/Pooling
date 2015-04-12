@@ -34,6 +34,19 @@ public class BillPoolingActivity extends Activity {
 		intent.putExtras(address);
 		startActivity(intent);
 	}
+	
+	public void near(View view) {
+		Intent intent = new Intent(this, NearActivity.class);
+		startActivity(intent);
+	}
+	
+	public void search(View view) {
+		Intent intent  = new Intent(this, CitiesActivity.class);
+		Bundle classes = new Bundle();
+		classes.putString("classes", "search");
+		intent.putExtras(classes);
+		startActivity(intent);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

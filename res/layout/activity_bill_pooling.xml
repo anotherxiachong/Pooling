@@ -20,17 +20,32 @@
             <LinearLayout 
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
                 android:background="#FFFFFF">
-                
-                <Button 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Post"
-                    android:onClick="post"/>
-                
               
-                
+                    <LinearLayout 
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_gravity="center_vertical">
+                    <Button 
+                        android:id="@+id/post"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="发起"
+                        android:onClick="post"/>
+                    <Button 
+                        android:id="@+id/near"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="附近"
+                        android:onClick="near"/>
+                    <Button 
+                        android:id="@+id/search"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="搜索"
+                        android:onClick="search"/>
+                    </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </com.another.pooling.SlidingMenu>

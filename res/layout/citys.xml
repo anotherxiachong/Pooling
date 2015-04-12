@@ -2,8 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000"
-    android:orientation="vertical" >
+    android:background="#000000">
+    
+    <LinearLayout 
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:layout_gravity="center">
 
     <TextView
         android:layout_width="wrap_content"
@@ -16,7 +21,7 @@
         android:id="@+id/guide"/>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/layout_bg"
         android:orientation="horizontal" >
@@ -53,10 +58,10 @@
     <Button 
 		android:onClick="sure"
 		android:layout_gravity="right"
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
 		android:text="确定"
         />
-    
+    </LinearLayout>
 
 </LinearLayout>

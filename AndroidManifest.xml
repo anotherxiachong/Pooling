@@ -8,27 +8,21 @@
         android:minSdkVersion="8"
         android:targetSdkVersion="21" />
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
-    
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" >
     </uses-permission>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" >
     </uses-permission>
-   
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" >
     </uses-permission>
-   
-    
- 
     <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" >
     </uses-permission>
-  
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
@@ -51,7 +45,7 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
-         <activity
+        <activity
             android:name=".CitiesActivity"
             android:label="@string/title_activity_cities" >
         </activity>
@@ -108,10 +102,19 @@
             android:name=".BillInfoActivity"
             android:label="@string/title_activity_bill_info" >
         </activity>
-        
+
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="c3f42135c62a3d9fbc1512048cc1a520" />
+
+        <activity
+            android:name=".NearActivity"
+            android:label="@string/title_activity_near" >
+        </activity>
+        <activity
+            android:name=".SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
     </application>
 
 </manifest>

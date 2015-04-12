@@ -73,6 +73,14 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 	
 	public void input(View view) {
 		Intent intent  = new Intent(this, CitiesActivity.class);
+		Bundle classes = new Bundle();
+		classes.putString("classes", "post");
+		intent.putExtras(classes);
+		startActivity(intent);
+	}
+	
+	public void cancel(View view) {
+		Intent intent  = new Intent(this, BillPoolingActivity.class);
 		startActivity(intent);
 	}
 	
@@ -171,7 +179,7 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 		
 	}
 
-
+   
 
 	@Override
 	public void onLocationChanged(AMapLocation arg0) {
