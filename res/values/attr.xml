@@ -6,5 +6,15 @@
     <declare-styleable name="SlidingMenu">
         <attr name="rightPadding"></attr>
     </declare-styleable>
+    
+    <attr name="titleText" format="string" />
+    <attr name="titleTextColor" format="color" />
+    <attr name="titleTextSize" format="dimension" />
+
+    <declare-styleable name="CustomTitleView">
+        <attr name="titleText" />
+        <attr name="titleTextColor" />
+        <attr name="titleTextSize" />
+    </declare-styleable>
 
 </resources>

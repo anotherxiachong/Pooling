@@ -19,6 +19,33 @@ theme attribute (in the form
 containing a value of this type.
          */
         public static final int rightPadding=0x7f010000;
+        /** <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int titleText=0x7f010001;
+        /** <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int titleTextColor=0x7f010002;
+        /** <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+         */
+        public static final int titleTextSize=0x7f010003;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -70,55 +97,60 @@ containing a value of this type.
         public static final int wheel_val=0x7f020023;
     }
     public static final class id {
-        public static final int action_settings=0x7f080033;
+        public static final int action_settings=0x7f080038;
         public static final int btn_login=0x7f080012;
-        public static final int btn_logout=0x7f08001e;
+        public static final int btn_logout=0x7f080020;
         public static final int btn_register=0x7f080013;
-        public static final int btn_relation_qq=0x7f08001a;
-        public static final int btn_relation_weibo=0x7f08001b;
-        public static final int btn_remove_qq=0x7f08001c;
-        public static final int btn_remove_weibo=0x7f08001d;
+        public static final int btn_relation_qq=0x7f08001c;
+        public static final int btn_relation_weibo=0x7f08001d;
+        public static final int btn_remove_qq=0x7f08001e;
+        public static final int btn_remove_weibo=0x7f08001f;
+        public static final int datalist=0x7f080017;
         public static final int deadline=0x7f080004;
         public static final int describe=0x7f080002;
         public static final int enter=0x7f08000e;
         public static final int et_account=0x7f080010;
         public static final int et_pwd=0x7f080011;
-        public static final int guide=0x7f080028;
-        public static final int id_area=0x7f08002b;
-        public static final int id_city=0x7f08002a;
-        public static final int id_img1=0x7f08002d;
-        public static final int id_img1_1=0x7f08002e;
-        public static final int id_img2=0x7f08002f;
-        public static final int id_img3=0x7f080030;
-        public static final int id_img4=0x7f080031;
-        public static final int id_img5=0x7f080032;
+        public static final int guide=0x7f08002d;
+        public static final int id_area=0x7f080030;
+        public static final int id_city=0x7f08002f;
+        public static final int id_img1=0x7f080032;
+        public static final int id_img1_1=0x7f080033;
+        public static final int id_img2=0x7f080034;
+        public static final int id_img3=0x7f080035;
+        public static final int id_img4=0x7f080036;
+        public static final int id_img5=0x7f080037;
         public static final int id_menu=0x7f080009;
-        public static final int id_province=0x7f080029;
-        public static final int id_street=0x7f08002c;
-        public static final int id_tab_address=0x7f080024;
-        public static final int id_tab_address_img=0x7f080025;
-        public static final int id_tab_frd=0x7f080022;
-        public static final int id_tab_frd_img=0x7f080023;
-        public static final int id_tab_settings=0x7f080026;
-        public static final int id_tab_settings_img=0x7f080027;
-        public static final int id_tab_weixin=0x7f080020;
-        public static final int id_tab_weixin_img=0x7f080021;
+        public static final int id_province=0x7f08002e;
+        public static final int id_street=0x7f080031;
+        public static final int id_tab_address=0x7f080029;
+        public static final int id_tab_address_img=0x7f08002a;
+        public static final int id_tab_frd=0x7f080027;
+        public static final int id_tab_frd_img=0x7f080028;
+        public static final int id_tab_settings=0x7f08002b;
+        public static final int id_tab_settings_img=0x7f08002c;
+        public static final int id_tab_weixin=0x7f080025;
+        public static final int id_tab_weixin_img=0x7f080026;
+        public static final int image=0x7f080023;
         public static final int inputaddress=0x7f080008;
-        public static final int iv_back=0x7f080018;
+        public static final int iv_back=0x7f08001a;
         public static final int link=0x7f080003;
         public static final int near=0x7f08000b;
         public static final int offline_address=0x7f080006;
         public static final int online_address=0x7f080005;
         public static final int post=0x7f08000a;
+        public static final int pre_describe=0x7f080024;
         public static final int result=0x7f080016;
         public static final int search=0x7f08000c;
-        public static final int search_result=0x7f080017;
+        public static final int search_datalist=0x7f080019;
+        public static final int search_result=0x7f080018;
         public static final int tabs=0x7f080007;
-        public static final int tv_desc=0x7f08001f;
-        public static final int tv_info=0x7f080019;
+        public static final int tv_desc=0x7f080021;
+        public static final int tv_info=0x7f08001b;
         public static final int tv_qq=0x7f080015;
         public static final int tv_top=0x7f08000f;
         public static final int tv_weibo=0x7f080014;
+        public static final int user_icon=0x7f080022;
         public static final int usericon=0x7f080000;
         public static final int username=0x7f080001;
         public static final int viewpager=0x7f08000d;
@@ -136,17 +168,20 @@ containing a value of this type.
         public static final int activity_login=0x7f030009;
         public static final int activity_main=0x7f03000a;
         public static final int activity_near=0x7f03000b;
-        public static final int activity_search=0x7f03000c;
-        public static final int activity_setting=0x7f03000d;
-        public static final int bottom=0x7f03000e;
-        public static final int citys=0x7f03000f;
-        public static final int left_menu=0x7f030010;
-        public static final int splash=0x7f030011;
-        public static final int tab01=0x7f030012;
-        public static final int tab02=0x7f030013;
-        public static final int tab03=0x7f030014;
-        public static final int tab04=0x7f030015;
-        public static final int top=0x7f030016;
+        public static final int activity_result=0x7f03000c;
+        public static final int activity_search=0x7f03000d;
+        public static final int activity_search_result=0x7f03000e;
+        public static final int activity_setting=0x7f03000f;
+        public static final int bill_info_layout=0x7f030010;
+        public static final int bottom=0x7f030011;
+        public static final int citys=0x7f030012;
+        public static final int left_menu=0x7f030013;
+        public static final int splash=0x7f030014;
+        public static final int tab01=0x7f030015;
+        public static final int tab02=0x7f030016;
+        public static final int tab03=0x7f030017;
+        public static final int tab04=0x7f030018;
+        public static final int top=0x7f030019;
     }
     public static final class menu {
         public static final int bill_info=0x7f070000;
@@ -157,8 +192,10 @@ containing a value of this type.
         public static final int guide=0x7f070005;
         public static final int main=0x7f070006;
         public static final int near=0x7f070007;
-        public static final int search=0x7f070008;
-        public static final int setting=0x7f070009;
+        public static final int result=0x7f070008;
+        public static final int search=0x7f070009;
+        public static final int search_result=0x7f07000a;
+        public static final int setting=0x7f07000b;
     }
     public static final class string {
         public static final int action_settings=0x7f050002;
@@ -173,7 +210,9 @@ containing a value of this type.
         public static final int title_activity_guide=0x7f050003;
         public static final int title_activity_login=0x7f050004;
         public static final int title_activity_near=0x7f05000d;
+        public static final int title_activity_result=0x7f05000f;
         public static final int title_activity_search=0x7f05000e;
+        public static final int title_activity_search_result=0x7f050010;
         public static final int title_activity_setting=0x7f050009;
         public static final int title_activity_splash=0x7f050006;
     }
@@ -183,7 +222,7 @@ containing a value of this type.
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
 
-            Theme customizations available in newer API levels can go in
+            Theme customizations available in newer API levels can go in2
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
         
@@ -206,6 +245,68 @@ containing a value of this type.
         public static final int AppTheme=0x7f060001;
     }
     public static final class styleable {
+        /** Attributes that can be used with a CustomTitleView.
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #CustomTitleView_titleText com.another.pooling:titleText}</code></td><td></td></tr>
+           <tr><td><code>{@link #CustomTitleView_titleTextColor com.another.pooling:titleTextColor}</code></td><td></td></tr>
+           <tr><td><code>{@link #CustomTitleView_titleTextSize com.another.pooling:titleTextSize}</code></td><td></td></tr>
+           </table>
+           @see #CustomTitleView_titleText
+           @see #CustomTitleView_titleTextColor
+           @see #CustomTitleView_titleTextSize
+         */
+        public static final int[] CustomTitleView = {
+            0x7f010001, 0x7f010002, 0x7f010003
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.another.pooling.R.attr#titleText}
+          attribute's value can be found in the {@link #CustomTitleView} array.
+
+
+          <p>Must be a string value, using '\\;' to escape characters such as '\\n' or '\\uxxxx' for a unicode character.
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.another.pooling:titleText
+        */
+        public static final int CustomTitleView_titleText = 0;
+        /**
+          <p>This symbol is the offset where the {@link com.another.pooling.R.attr#titleTextColor}
+          attribute's value can be found in the {@link #CustomTitleView} array.
+
+
+          <p>Must be a color value, in the form of "<code>#<i>rgb</i></code>", "<code>#<i>argb</i></code>",
+"<code>#<i>rrggbb</i></code>", or "<code>#<i>aarrggbb</i></code>".
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.another.pooling:titleTextColor
+        */
+        public static final int CustomTitleView_titleTextColor = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.another.pooling.R.attr#titleTextSize}
+          attribute's value can be found in the {@link #CustomTitleView} array.
+
+
+          <p>Must be a dimension value, which is a floating point number appended with a unit such as "<code>14.5sp</code>".
+Available units are: px (pixels), dp (density-independent pixels), sp (scaled pixels based on preferred font size),
+in (inches), mm (millimeters).
+<p>This may also be a reference to a resource (in the form
+"<code>@[<i>package</i>:]<i>type</i>:<i>name</i></code>") or
+theme attribute (in the form
+"<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>")
+containing a value of this type.
+          @attr name com.another.pooling:titleTextSize
+        */
+        public static final int CustomTitleView_titleTextSize = 2;
         /** Attributes that can be used with a SlidingMenu.
            <p>Includes the following attributes:</p>
            <table>

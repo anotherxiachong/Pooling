@@ -36,7 +36,7 @@ public class BillPoolingActivity extends Activity {
 	}
 	
 	public void near(View view) {
-		Intent intent = new Intent(this, NearActivity.class);
+		Intent intent = new Intent(this, NearResultActivity.class);
 		startActivity(intent);
 	}
 	

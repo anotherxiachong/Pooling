@@ -16,5 +16,7 @@
     <string name="title_activity_cities">CitiesActivity</string>
     <string name="title_activity_near">NearActivity</string>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="title_activity_search_result">SearchResultActivity</string>
 
 </resources>

@@ -36,8 +36,7 @@ public class MainActivity extends Activity {
 	}
 	
 	public void EnterSetting(View view) {
-		Intent intent = new Intent(this, SettingActivity.class);
-		startActivity(intent);
+	
 	}
 
 	@Override
