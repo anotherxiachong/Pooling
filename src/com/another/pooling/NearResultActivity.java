@@ -29,8 +29,10 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 	private String username[] = null;
 	private int image[] = null;
 	private String pre_desString[] = null;
+	private String no[] = null;
 	private String string_dec;
 	private String string_username;
+	private String string_no;
 	private int length = 0;
 
 	private ListView datalist = null; // 定义ListView组件
@@ -73,8 +75,10 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 		        //Toast.makeText(NearActivity.this, "查询成功：共" + object.size() + "条数据。"/*  + mPosition.getLatitude() + " " + mPosition.getLongitude()*/, Toast.LENGTH_LONG).show();
 		    	string_dec= "";
 		    	string_username="";
+		    	string_no="";
 		    	for(BillInfo billInfo : object) {
 		    		string_username = string_username + billInfo.getUsername() + " ";
+		    		string_no = string_no + billInfo.getObjectId() + " ";
 		    		if(billInfo.getDescribe().equals("")) {
 		    			string_dec= string_dec + "暂无" + " ";
 		    		} else {
@@ -82,9 +86,10 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 		    		}
 		    	}
 		    	username = string_username.trim().split(" ");
+		    	no = string_no.trim().split(" ");
 		    	pre_desString = string_dec.trim().split(" ");
 		    	length = username.length;
-		    	Log.i("username", length+"");
+		    	//Log.i("username", length+"");
 		    	initView();
 		    }
 		    @Override
@@ -94,6 +99,24 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 		    }
 		});
 	}
+
+	datalist.setOnItemClickListener(new OnItemClickListener(){  
+
+		@SuppressWarnings("unchecked")  
+		@Override  
+
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {  
+			ListView listView = (ListView)parent;  
+			HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);  
+			String no = map.get("no");
+			//Toast.makeText(SQLiteCRUDActivity.this, userid +" , "+ name +" , "+ age ,Toast.LENGTH_LONG).show(); 
+			Intent intent = new Intent(NearResultActivity.this, DetailResultActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("objectId", no);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}  
+	});  
 	
 	
 	private void initView() {
@@ -102,14 +125,15 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 			Map<String, String> map = new HashMap<String, String>(); // 定义Map集合，保存每一行数据
 			map.put("user_icon", String.valueOf(R.drawable.ic_launcher)); // 与data_list.xml中的TextView组加匹配
 			map.put("username", this.username[x]); // 与data_list.xml中的TextView组加匹配
+			map.put("no", this.no[x]);
 			map.put("image", String.valueOf(R.drawable.guide_image1)); // 与data_list.xml中的TextView组加匹配
 			map.put("pre_describe", this.pre_desString[x]);
 			this.list.add(map); // 保存了所有的数据行
 		} 
 		this.simpleAdapter = new SimpleAdapter(this, this.list,
-				R.layout.bill_info_layout, new String[] { "user_icon", "username", "image",
+				R.layout.bill_info_layout, new String[] { "user_icon", "username", "no", "image",
 						"pre_describe"} // Map中的key的名称
-				, new int[] { R.id.user_icon, R.id.username, R.id.image, R.id.pre_describe }); // 是data_list.xml中定义的组件的资源ID
+				, new int[] { R.id.user_icon, R.id.username, R.id.no, R.id.image, R.id.pre_describe }); // 是data_list.xml中定义的组件的资源ID
 		this.datalist.setAdapter(this.simpleAdapter);
 	}
 

@@ -102,6 +102,7 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 		mBillInfo.setDeadline(deadlineString);
 		mBillInfo.setLink(linkString);
 		mBillInfo.setAddress(addressString);
+		mBillInfo.setDetailAddress(detailAddresString);
 		mBillInfo.setPosition(mBmobGeoPoint);
 		
 		mBillInfo.save(BillInfoActivity.this, new SaveListener() {

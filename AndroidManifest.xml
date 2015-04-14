@@ -123,6 +123,10 @@
             android:name=".SearchResultActivity"
             android:label="@string/title_activity_search_result" >
         </activity>
+        <activity
+            android:name=".DetailResultActivity"
+            android:label="@string/title_activity_detail_result" >
+        </activity>
     </application>
 
 </manifest>
