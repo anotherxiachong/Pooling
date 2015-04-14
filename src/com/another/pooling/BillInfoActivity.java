@@ -19,6 +19,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,8 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 	private EditText address;
 	private EditText detailaddress;
 	
+	private String temp;  
+	
 
 
 	LocationManagerProxy mLocationManagerProxy;
@@ -51,6 +54,9 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		if (savedInstanceState != null) {  
+            temp = savedInstanceState.getString("temp");  
+        }  
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_bill_info);
 		
@@ -102,7 +108,7 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 		mBillInfo.setDeadline(deadlineString);
 		mBillInfo.setLink(linkString);
 		mBillInfo.setAddress(addressString);
-		mBillInfo.setDetailAddress(detailAddresString);
+		mBillInfo.setDetailaddress(detailAddresString);
 		mBillInfo.setPosition(mBmobGeoPoint);
 		
 		mBillInfo.save(BillInfoActivity.this, new SaveListener() {
@@ -120,6 +126,25 @@ public class BillInfoActivity extends Activity implements AMapLocationListener {
 			}
 		});
 		
+	}
+
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		temp = "xing";  
+        System.out.println("onResume: temp = " + temp);  
+        // 切换屏幕方向会导致activity的摧毁和重建  
+        if (getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) {  
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);  
+        } 
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+		outState.putString("temp", temp);
 	}
 
 	@Override

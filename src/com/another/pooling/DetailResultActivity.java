@@ -1,9 +1,21 @@
 package com.another.pooling;
 
+import java.util.List;
+
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobQuery;
+import cn.bmob.v3.listener.FindListener;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 public class DetailResultActivity extends Activity {
 
 	private String no;
-	private EditText r_username;
+	private TextView r_username;
 	private EditText r_describe;
 	private EditText r_deadline;
 	private EditText r_online_address;
@@ -18,7 +30,7 @@ public class DetailResultActivity extends Activity {
 		
 		no = getIntent().getExtras().getString("objectId");
 
-		r_username = (EditText) findViewById(R.id.r_username);
+		r_username = (TextView) findViewById(R.id.r_username);
 		r_describe = (EditText) findViewById(R.id.r_describe);
 		r_deadline = (EditText) findViewById(R.id.r_deadline);
 		r_online_address = (EditText) findViewById(R.id.r_online_address);

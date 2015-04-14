@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/usericon"
-            android:src="@drawable/ic_launcher"/>
+            android:src="@drawable/pooling_ic"/>
         
         <TextView 
             android:layout_width="wrap_content"
@@ -38,7 +38,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/r_describe"
             android:hint="商品描述"
-            android:lines="5"/>
+            android:lines="5"
+            android:editable="false"
+            android:focusable="false"/>
     
     </LinearLayout>
     
@@ -55,7 +57,9 @@
         <EditText 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/r_link"/>
+            android:id="@+id/r_link"
+            android:editable="false"
+            android:focusable="false"/>
     
     </LinearLayout>
     
@@ -72,7 +76,9 @@
         <EditText 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/r_deadline"/>
+            android:id="@+id/r_deadline"
+            android:editable="false"
+            android:focusable="false"/>
     
     </LinearLayout>
     
@@ -89,7 +95,9 @@
         <EditText 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/r_online_address"/>
+            android:id="@+id/r_online_address"
+            android:editable="false"
+            android:focusable="false"/>
     
     </LinearLayout>
     
@@ -106,7 +114,9 @@
         <EditText 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/r_offline_address"/>
+            android:id="@+id/r_offline_address"
+            android:editable="false"
+            android:focusable="false"/>
     
     </LinearLayout>
     
@@ -124,7 +134,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/r_tabs"
-            android:text="N/A"/>
+            android:text="N/A"
+            android:editable="false"
+            android:focusable="false"/>
     
     </LinearLayout>
 

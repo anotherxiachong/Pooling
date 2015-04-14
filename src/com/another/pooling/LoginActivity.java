@@ -39,6 +39,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 		if(user!=null){
 			Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 			startActivity(intent);
+			LoginActivity.this.finish();
 		}
 	}
 
@@ -85,6 +86,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 					// TODO Auto-generated method stub
 					Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 					startActivity(intent);
+					LoginActivity.this.finish();
 				}
 				
 				@Override
@@ -117,6 +119,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 					// TODO Auto-generated method stub
 					Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 					startActivity(intent);
+					LoginActivity.this.finish();
 				}
 
 				@Override
@@ -146,6 +149,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 					intent.putExtra("json", userAuth.toString());
 					intent.putExtra("from", "weibo");
 					startActivity(intent);
+					LoginActivity.this.finish();
 				}
 				
 				@Override
@@ -179,6 +183,7 @@ public class LoginActivity extends Activity implements OnClickListener{
 					intent.putExtra("json", userAuth.toString());
 					intent.putExtra("from", "qq");
 					startActivity(intent);
+					LoginActivity.this.finish();
 				}
 				
 				@Override

@@ -29,7 +29,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/pooling_ic_middle"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
@@ -120,8 +120,16 @@
             android:label="@string/title_activity_result" >
         </activity>
         <activity
+            android:name=".NearResultActivity"
+            android:label="@string/title_activity_near_result" >
+        </activity>
+        <activity
             android:name=".SearchResultActivity"
             android:label="@string/title_activity_search_result" >
+        </activity>
+        <activity
+            android:name=".DetailResultActivity"
+            android:label="@string/title_activity_detail_result" >
         </activity>
     </application>
 

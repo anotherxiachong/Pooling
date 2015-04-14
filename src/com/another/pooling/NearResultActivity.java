@@ -16,9 +16,13 @@ import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
@@ -99,31 +103,12 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 		    }
 		});
 	}
-
-	datalist.setOnItemClickListener(new OnItemClickListener(){  
-
-		@SuppressWarnings("unchecked")  
-		@Override  
-
-		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {  
-			ListView listView = (ListView)parent;  
-			HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);  
-			String no = map.get("no");
-			//Toast.makeText(SQLiteCRUDActivity.this, userid +" , "+ name +" , "+ age ,Toast.LENGTH_LONG).show(); 
-			Intent intent = new Intent(NearResultActivity.this, DetailResultActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("objectId", no);
-			intent.putExtras(bundle);
-			startActivity(intent);
-		}  
-	});  
-	
 	
 	private void initView() {
 		this.datalist = (ListView) super.findViewById(R.id.datalist); // 取得组件
 		for (int x = 0; x < length; x++) {
 			Map<String, String> map = new HashMap<String, String>(); // 定义Map集合，保存每一行数据
-			map.put("user_icon", String.valueOf(R.drawable.ic_launcher)); // 与data_list.xml中的TextView组加匹配
+			map.put("user_icon", String.valueOf(R.drawable.pooling_ic)); // 与data_list.xml中的TextView组加匹配
 			map.put("username", this.username[x]); // 与data_list.xml中的TextView组加匹配
 			map.put("no", this.no[x]);
 			map.put("image", String.valueOf(R.drawable.guide_image1)); // 与data_list.xml中的TextView组加匹配
@@ -135,6 +120,22 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 						"pre_describe"} // Map中的key的名称
 				, new int[] { R.id.user_icon, R.id.username, R.id.no, R.id.image, R.id.pre_describe }); // 是data_list.xml中定义的组件的资源ID
 		this.datalist.setAdapter(this.simpleAdapter);
+		
+		datalist.setOnItemClickListener(new OnItemClickListener(){  
+			@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {  
+			ListView listView = (ListView)parent;  
+			@SuppressWarnings("unchecked")
+			HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);  
+			String no = map.get("no");
+			//Toast.makeText(SQLiteCRUDActivity.this, userid +" , "+ name +" , "+ age ,Toast.LENGTH_LONG).show(); 
+			Intent intent = new Intent(NearResultActivity.this, DetailResultActivity.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("objectId", no);
+			intent.putExtras(bundle);
+			startActivity(intent);
+		}  
+	});  
 	}
 
 
