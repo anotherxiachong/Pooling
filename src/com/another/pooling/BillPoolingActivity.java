@@ -1,5 +1,7 @@
 package com.another.pooling;
 
+import com.example.testpic.PublishedActivity;
+
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.content.Intent;
@@ -28,11 +30,13 @@ public class BillPoolingActivity extends Activity {
 	}
 	
 	public void post(View view) {
-		Intent intent = new Intent(this, BillInfoActivity.class);
-		Bundle address = new Bundle();
-		address.putString("address", "");
-		intent.putExtras(address);
-		startActivity(intent);
+		//Intent intent = new Intent(this, BillInfoActivity.class);
+		//Bundle address = new Bundle();
+		//address.putString("address", "");
+		//intent.putExtras(address);
+		//startActivity(intent);
+		Intent intent = new Intent(this, PublishedActivity.class);
+		startActivityForResult(intent, RESULT_OK);
 	}
 	
 	public void near(View view) {

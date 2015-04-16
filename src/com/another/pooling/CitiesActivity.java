@@ -381,7 +381,8 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 			Bundle address = new Bundle();
 			address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
 			intent.putExtras(address);
-			startActivity(intent);
+			setResult(3, intent);
+			finish();
 		} else if(classes.equals("search")) {
 			Intent intent = new Intent(CitiesActivity.this, SearchResultActivity.class);
 			Bundle address = new Bundle();

@@ -2,6 +2,7 @@ package com.another.pooling;
 
 import java.util.ArrayList;
 
+import android.support.annotation.StringDef;
 import cn.bmob.v3.BmobObject;
 import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobGeoPoint;
@@ -18,6 +19,7 @@ public class BillInfo extends BmobObject {
 	ArrayList<String> tabs;
 	Boolean classes;
 	ArrayList<String> followman;
+	String imgfilename;
 	
 	
 	
@@ -87,5 +89,11 @@ public class BillInfo extends BmobObject {
 	}
 	public void setFollowman(ArrayList<String> followman) {
 		this.followman = followman;
+	}
+	public String getImgfilename() {
+		return imgfilename;
+	}
+	public void setImgfilename(String imgfilename) {
+		this.imgfilename = imgfilename;
 	}
 }

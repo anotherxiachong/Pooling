@@ -125,7 +125,7 @@ public class SlidingMenu extends HorizontalScrollView
 		case MotionEvent.ACTION_UP:
 			// 隐藏在左边的宽度
 			int scrollX = getScrollX();
-			if (scrollX >= mMenuWidth / 2)
+			if (scrollX >= (mMenuWidth / 4) * 3 )
 			{
 				this.smoothScrollTo(mMenuWidth, 0);
 				isOpen = false;

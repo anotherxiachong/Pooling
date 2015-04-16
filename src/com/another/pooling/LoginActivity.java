@@ -158,6 +158,12 @@ public class LoginActivity extends Activity implements OnClickListener{
 					//若出现授权失败(authData error)，可清除该应用缓存，之后在授权新浪登陆
 					toast("第三方登陆失败："+msg);
 				}
+
+				@Override
+				public void onCancel() {
+					// TODO Auto-generated method stub
+					
+				}
 			});
 			
 			break;
@@ -190,6 +196,12 @@ public class LoginActivity extends Activity implements OnClickListener{
 				public void onFailure(int code, String msg) {
 					// TODO Auto-generated method stub
 					toast("第三方登陆失败："+msg);
+				}
+
+				@Override
+				public void onCancel() {
+					// TODO Auto-generated method stub
+					
 				}
 			});
 			break;
