@@ -3,9 +3,24 @@ package com.example.testpic;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.datatype.BmobGeoPoint;
+import cn.bmob.v3.listener.SaveListener;
+
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.location.LocationManagerProxy;
+import com.amap.api.location.LocationProviderProxy;
+import com.another.pooling.BillInfo;
+import com.another.pooling.BillPoolingActivity;
+import com.another.pooling.CitiesActivity;
 import com.another.pooling.R;
+import com.bmob.BmobProFile;
+import com.bmob.btp.callback.UploadBatchListener;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,13 +32,13 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,6 +50,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,18 +58,91 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PublishedActivity extends Activity
+public class PublishedActivity extends Activity implements AMapLocationListener
 {
 
 	private GridView noScrollgridview;
 	private GridAdapter adapter;
 	private TextView activity_selectimg_send;
+	private static final int CITY_SELECT = 1;
+	private EditText decribe;
+	private EditText deadline;
+	private double longitude;
+	private double latitude;
+	private BmobGeoPoint mBmobGeoPoint;
+	private EditText link;
+	private EditText address;
+	private EditText detailaddress;
+	LocationManagerProxy mLocationManagerProxy;
+	private String[] savefilename;
+	
+
+	private static String[] names =null;
 
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_selectimg);
+		Bmob.initialize(this, "dc417cd048f5197ba699440c13977f34");
+		decribe = (EditText) findViewById(R.id.describe);
+		deadline = (EditText) findViewById(R.id.deadline);
+		link = (EditText) findViewById(R.id.link);
+		address = (EditText) findViewById(R.id.address);
+		detailaddress = (EditText) findViewById(R.id.detail_address);
+		mLocationManagerProxy = LocationManagerProxy.getInstance(this);
+	    mLocationManagerProxy.requestLocationData(LocationProviderProxy.AMapNetwork,-1, 15, this);
 		Init();
+	}
+	
+	public void input(View view) {
+		Intent intent  = new Intent(this, CitiesActivity.class);
+		Bundle classes = new Bundle();
+		classes.putString("classes", "post");
+		intent.putExtras(classes);
+		startActivityForResult(intent, CITY_SELECT);
+	}
+	
+	public void cancel(View view) {
+		Intent intent  = new Intent(this, BillPoolingActivity.class);
+		startActivity(intent);
+	}
+	
+	public void post() {
+		BmobUser bmobUser = BmobUser.getCurrentUser(this);
+		String username = bmobUser.getUsername();
+		String descibeString = decribe.getText().toString();
+		String deadlineString = deadline.getText().toString();
+		String linkString = link.getText().toString();
+		String addressString = address.getText().toString();
+		String detailAddresString = detailaddress.getText().toString();
+		mBmobGeoPoint = new BmobGeoPoint(longitude, latitude);
+		
+		BillInfo mBillInfo = new BillInfo();
+		mBillInfo.setUsername(username);
+		mBillInfo.setDescribe(descibeString);
+		mBillInfo.setDeadline(deadlineString);
+		mBillInfo.setLink(linkString);
+		mBillInfo.setAddress(addressString);
+		mBillInfo.setDetailaddress(detailAddresString);
+		mBillInfo.setPosition(mBmobGeoPoint);
+		
+		mBillInfo.addAll("imgfilename", Arrays.asList(savefilename));
+		
+		mBillInfo.save(PublishedActivity.this, new SaveListener() {
+			
+			@Override
+			public void onSuccess() {
+				// TODO Auto-generated method stub
+				Toast.makeText(PublishedActivity.this, "发布成功", Toast.LENGTH_LONG).show();
+			}
+			
+			@Override
+			public void onFailure(int arg0, String arg1) {
+				// TODO Auto-generated method stub
+				Toast.makeText(PublishedActivity.this, "请检查网络", Toast.LENGTH_LONG).show();
+			}
+		});
+		
 	}
 
 	public void Init()	
@@ -94,12 +183,41 @@ public class PublishedActivity extends Activity
 							Bimp.drr.get(i).lastIndexOf("/") + 1,
 							Bimp.drr.get(i).lastIndexOf("."));
 					list.add(FileUtils.SDPATH + Str + ".JPEG");
-					Log.i("path", FileUtils.SDPATH + Str + ".JPEG");
+					//Log.i("path", FileUtils.SDPATH + Str + ".JPEG");
 				}
 				// 高清的压缩图片全部就在 list 路径里面了
 				// 高清的压缩过的 bmp 对象 都在 Bimp.bmp里面
 				// 完成上传服务器后 .........
-				FileUtils.deleteDir();
+				names = list.toArray(new String[1]);
+				BmobProFile.getInstance(PublishedActivity.this).uploadBatch(names, 
+						new UploadBatchListener() {
+					
+					@Override
+					public void onError(int arg0, String arg1) {
+						// TODO Auto-generated method stub
+						Toast.makeText(PublishedActivity.this, "请检查网络", Toast.LENGTH_LONG).show();
+					}
+					
+					@Override
+					public void onSuccess(boolean arg0, String[] arg1, String[] arg2) {
+						// TODO Auto-generated method stub
+						//Toast.makeText(PublishedActivity.this, "success"+arg0, Toast.LENGTH_LONG).show();
+						if(arg0) {
+							Toast.makeText(PublishedActivity.this, "上传完成"+arg1.length, Toast.LENGTH_LONG).show();
+							FileUtils.deleteDir();
+							savefilename = arg1;
+							Toast.makeText(PublishedActivity.this, "上传"+savefilename.length, Toast.LENGTH_LONG).show();
+							post();
+						}
+					}
+					
+					@Override
+					public void onProgress(int curIndex, int curPercent, int total, int totalPercent) {
+						// TODO Auto-generated method stub
+						Toast.makeText(PublishedActivity.this,
+								"正在上传第"+curIndex+"张  进度"+curPercent+"\n总共"+total+"张  进度"+totalPercent, Toast.LENGTH_LONG).show();
+					}
+				});
 			}
 		});
 	}
@@ -383,13 +501,66 @@ public class PublishedActivity extends Activity
 				Bimp.drr.add(path);  //将照片路径添加到drr中
 			}
 			break;
+			
+		case CITY_SELECT:
+			if ( resultCode == 3)
+			{
+				address.setText(data.getExtras().getString("address"));
+			}
+			break;
 		}
 	}
 	
-	public void showPath() {
-		for(int i = 0; i < Bimp.drr.size(); i++) {
-			Log.i("path", (String)Bimp.drr.get(i));
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		mLocationManagerProxy.destory();
+	}
+
+
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
+		
+	}
+
+   
+
+	@Override
+	public void onLocationChanged(AMapLocation arg0) {
+		// TODO Auto-generated method stub
+		if(arg0 != null && arg0.getAMapException().getErrorCode() == 0) {
+			latitude = arg0.getLatitude();
+			longitude = arg0.getLongitude();
+			//Log.e("position", arg0.getLatitude() + " " + arg0.getLongitude());
 		}
 	}
+	
 
 }

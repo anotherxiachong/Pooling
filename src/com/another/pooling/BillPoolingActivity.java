@@ -1,15 +1,25 @@
 package com.another.pooling;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.example.testpic.PublishedActivity;
 
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.ext.SatelliteMenu;
+import android.view.ext.SatelliteMenuItem;
+import android.view.ext.SatelliteMenu.SateliteClickedListener;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 
 
 public class BillPoolingActivity extends Activity {
@@ -21,7 +31,33 @@ public class BillPoolingActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		setContentView(R.layout.activity_bill_pooling);
+		setContentView(R.layout.activity_main);
+		 SatelliteMenu menu = (SatelliteMenu) findViewById(R.id.menu);
+		WindowManager wm = this.getWindowManager();
+		int width = wm.getDefaultDisplay().getWidth();
+		int height = wm.getDefaultDisplay().getHeight();
+		
+		SatelliteMenu smenu = (SatelliteMenu) findViewById(R.id.menu);
+		LinearLayout.LayoutParams params = (LayoutParams) smenu.getLayoutParams();
+		params.topMargin = height - 1200;
+		smenu.setLayoutParams(params);
+		
+		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
+        items.add(new SatelliteMenuItem(6, R.drawable.ic_1));
+        items.add(new SatelliteMenuItem(5, R.drawable.ic_3));
+        items.add(new SatelliteMenuItem(4, R.drawable.ic_4));
+        items.add(new SatelliteMenuItem(3, R.drawable.ic_5));
+        items.add(new SatelliteMenuItem(2, R.drawable.ic_6));
+        items.add(new SatelliteMenuItem(1, R.drawable.ic_2));
+//        items.add(new SatelliteMenuItem(5, R.drawable.sat_item));
+        menu.addItems(items);        
+        
+        menu.setOnItemClickedListener(new SateliteClickedListener() {
+			
+			public void eventOccured(int id) {
+				Log.i("sat", "Clicked on " + id);
+			}
+		});
 	}
 	
 	public void toggleMenu(View view)
@@ -30,13 +66,13 @@ public class BillPoolingActivity extends Activity {
 	}
 	
 	public void post(View view) {
-		//Intent intent = new Intent(this, BillInfoActivity.class);
+		Intent intent = new Intent(this, PublishedActivity.class);
 		//Bundle address = new Bundle();
 		//address.putString("address", "");
 		//intent.putExtras(address);
-		//startActivity(intent);
-		Intent intent = new Intent(this, PublishedActivity.class);
-		startActivityForResult(intent, RESULT_OK);
+		startActivity(intent);
+		//Intent intent = new Intent(this, PublishedActivity.class);
+		//startActivityForResult(intent, RESULT_OK);
 	}
 	
 	public void near(View view) {

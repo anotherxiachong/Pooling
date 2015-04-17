@@ -2,6 +2,9 @@ package com.another.pooling;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.example.testpic.PublishedActivity;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,15 +15,21 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.ext.SatelliteMenu;
 import android.view.ext.SatelliteMenuItem;
 import android.view.ext.SatelliteMenu.SateliteClickedListener;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
 	
 	private SlidingMenu mLeftMenu ; 
+	private TextView onOff;
 	boolean isExit;  
 
 	@Override
@@ -33,9 +42,18 @@ public class MainActivity extends Activity {
 		
 		mLeftMenu = (SlidingMenu) findViewById(R.id.id_menu);
 		
+		WindowManager wm = this.getWindowManager();
+		int width = wm.getDefaultDisplay().getWidth();
+		int height = wm.getDefaultDisplay().getHeight();
+		
+		SatelliteMenu smenu = (SatelliteMenu) findViewById(R.id.menu);
+		LinearLayout.LayoutParams params = (LayoutParams) smenu.getLayoutParams();
+		params.topMargin = height - 1200;
+		smenu.setLayoutParams(params);
+		
 		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
-        items.add(new SatelliteMenuItem(4, R.drawable.ic_1));
-        items.add(new SatelliteMenuItem(4, R.drawable.ic_3));
+        items.add(new SatelliteMenuItem(6, R.drawable.ic_1));
+        items.add(new SatelliteMenuItem(5, R.drawable.ic_3));
         items.add(new SatelliteMenuItem(4, R.drawable.ic_4));
         items.add(new SatelliteMenuItem(3, R.drawable.ic_5));
         items.add(new SatelliteMenuItem(2, R.drawable.ic_6));
@@ -47,8 +65,42 @@ public class MainActivity extends Activity {
 			
 			public void eventOccured(int id) {
 				Log.i("sat", "Clicked on " + id);
+				switch (id) {
+				case 6:
+					Intent intent6 = new Intent(MainActivity.this, NearResultActivity.class);
+					startActivity(intent6);
+					break;
+					
+				case 5:
+					Intent intent5 = new Intent(MainActivity.this, PublishedActivity.class);
+					startActivity(intent5);
+					break;
+
+				default:
+					break;
+				}
 			}
 		});
+        /**
+        onOff = (TextView) findViewById(R.id.activity_selectimg_switch);
+        onOff.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				String content = "";
+				content = onOff.getText().toString();
+				Intent intent = new Intent(MainActivity.this, NearResultActivity.class);
+				if(content.equals("线上")) {
+					onOff.setText("线下");
+					startActivity(intent);
+				} else {
+					onOff.setText("线上");
+					startActivity(intent);
+				}
+			}
+		});
+		*/
 	}
 	
 	public void toggleMenu(View view)

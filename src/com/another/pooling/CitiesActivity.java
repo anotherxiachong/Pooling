@@ -7,6 +7,10 @@ import java.util.List;
 
 
 
+
+
+import com.example.testpic.PublishedActivity;
+
 import kankan.wheel.widget.OnWheelChangedListener;
 import kankan.wheel.widget.WheelView;
 import kankan.wheel.widget.adapters.ArrayWheelAdapter;
@@ -21,15 +25,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-/**
- * 
- * @author zhy
- * 
- */
+
 public class CitiesActivity extends Activity implements OnWheelChangedListener
 {
 	/**
@@ -57,19 +58,6 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 	private String[] mAreaDatas= {""};
 	private String[] mStreetDatas= {""};
 	/**
-	 * key - 省 value - 市s
-	 */
-	//private Map<String, String[]> mCitisDatasMap = new HashMap<String, String[]>();
-	/**
-	 * key - 市 values - 区s
-	 */
-	//private Map<String, String[]> mAreaDatasMap = new HashMap<String, String[]>();
-	/**
-	 * key - 区 values - 街道s
-	 */
-	//private Map<String, String[]> mStreetDatasMap = new HashMap<String, String[]>();
-
-	/**
 	 * 当前省的名称
 	 */
 	private String mCurrentProviceName="";
@@ -87,6 +75,7 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 	private String mCurrentStreetName ="";
 	
 	private String classes;
+	private TextView sure;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -104,6 +93,31 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 		mCity = (WheelView) findViewById(R.id.id_city);
 		mArea = (WheelView) findViewById(R.id.id_area);
 		mStreet = (WheelView) findViewById(R.id.id_street);
+		
+		sure = (TextView) findViewById(R.id.sure_address);
+		sure.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				if(classes.equals("post")) {
+					Intent intent = new Intent(CitiesActivity.this, PublishedActivity.class);
+					Bundle address = new Bundle();
+					address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
+					intent.putExtras(address);
+					setResult(3, intent);
+					finish();
+				} else if(classes.equals("search")) {
+					Intent intent = new Intent(CitiesActivity.this, SearchResultActivity.class);
+					Bundle address = new Bundle();
+					address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
+					intent.putExtras(address);
+					startActivity(intent);
+					finish();
+				}
+			}
+		});
 		
 		
 
@@ -370,11 +384,11 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 		// TODO Auto-generated method stub
 		int pCurrent = mStreet.getCurrentItem();
 		mCurrentStreetName = mStreetDatas[pCurrent];
-		TextView demo = (TextView) findViewById(R.id.guide);
-		demo.setText(mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
+		//TextView demo = (TextView) findViewById(R.id.guide);
+		//demo.setText(mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
 	}
-
-	public void sure(View view)
+   
+	/*public void sure(View view)
 	{
 		if(classes.equals("post")) {
 			Intent intent = new Intent(CitiesActivity.this, BillInfoActivity.class);
@@ -391,5 +405,5 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 			startActivity(intent);
 		}
 		//Toast.makeText(this, mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName, 1).show();
-	}
+	}*/
 }

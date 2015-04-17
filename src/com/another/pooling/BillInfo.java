@@ -19,7 +19,7 @@ public class BillInfo extends BmobObject {
 	ArrayList<String> tabs;
 	Boolean classes;
 	ArrayList<String> followman;
-	String imgfilename;
+	String[] imgfilename;
 	
 	
 	
@@ -90,10 +90,5 @@ public class BillInfo extends BmobObject {
 	public void setFollowman(ArrayList<String> followman) {
 		this.followman = followman;
 	}
-	public String getImgfilename() {
-		return imgfilename;
-	}
-	public void setImgfilename(String imgfilename) {
-		this.imgfilename = imgfilename;
-	}
+
 }

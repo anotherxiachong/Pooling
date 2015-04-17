@@ -29,32 +29,11 @@
                 android:textSize="20sp"
                 android:textColor="#FFFFFF"
                 android:layout_marginLeft="20dp"
-                android:text="线上"
+                android:text="拼单"
                 android:background="#0000"/>
             </RelativeLayout>
             
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:onClick="EnterBillPooling">
-            <ImageView  android:id="@+id/id_img1_1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="20dp"          
-                android:layout_marginTop="20dp"
-                android:src="@drawable/img_1"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/id_img1_1"
-                android:layout_centerVertical="true"
-                android:textSize="20sp"
-                android:textColor="#FFFFFF"
-                android:layout_marginLeft="20dp"
-                android:text="线下"
-                android:background="#0000"/>
-            </RelativeLayout>
+       
             
         <RelativeLayout
             android:layout_width="match_parent"

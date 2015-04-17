@@ -76,7 +76,11 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 		    @Override
 		    public void onSuccess(List<BillInfo> object) {
 		        // TODO Auto-generated method stub
-		        //Toast.makeText(NearActivity.this, "查询成功：共" + object.size() + "条数据。"/*  + mPosition.getLatitude() + " " + mPosition.getLongitude()*/, Toast.LENGTH_LONG).show();
+		        //Toast.makeText(NearResultActivity.this, "查询成功：共" + object.size() + "条数据。"/*  + mPosition.getLatitude() + " " + mPosition.getLongitude()*/, Toast.LENGTH_LONG).show();
+		    	if(object.size() == 0) {
+		    		Toast.makeText(NearResultActivity.this, "没有找到哦~快去发起拼单吧~", Toast.LENGTH_LONG).show();
+		    		NearResultActivity.this.finish();
+		    	}
 		    	string_dec= "";
 		    	string_username="";
 		    	string_no="";

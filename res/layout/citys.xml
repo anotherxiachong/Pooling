@@ -2,14 +2,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000000">
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+    
+    <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="60dp"
+             android:background="#ff495a" >
+             
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_centerInParent="true"
+                 android:text="收货地址"
+                 android:textColor="#ffffff"
+                 android:textSize="20sp" />
+             
+              <TextView
+                  android:id="@+id/sure_address"
+                  android:layout_width="wrap_content"
+                  android:layout_height="40dp"
+                  android:layout_alignParentRight="true"
+                  android:layout_centerVertical="true"
+                  android:layout_marginRight="8dp"
+                  android:gravity="center"
+                  android:text="确定"
+                  android:textColor="@drawable/text_while"
+                  android:textSize="20sp" />
+             
+       </RelativeLayout>
     
     <LinearLayout 
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:orientation="vertical"
          android:layout_gravity="center">
-
+         
+         
+<!--  
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,7 +48,7 @@
         android:text="请选择城市"
         android:textColor="#ffffff"
         android:textSize="20sp" 
-        android:id="@+id/guide"/>
+        android:id="@+id/guide"/>  -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -54,14 +84,7 @@
             android:layout_weight="1" >
         </kankan.wheel.widget.WheelView>
     </LinearLayout>
-    
-    <Button 
-		android:onClick="sure"
-		android:layout_gravity="right"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:text="确定"
-        />
+
     </LinearLayout>
 
 </LinearLayout>
