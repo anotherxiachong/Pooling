@@ -5,7 +5,6 @@ import java.util.List;
 
 import com.example.testpic.PublishedActivity;
 
-import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,13 +33,12 @@ public class BillPoolingActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		 SatelliteMenu menu = (SatelliteMenu) findViewById(R.id.menu);
 		WindowManager wm = this.getWindowManager();
-		int width = wm.getDefaultDisplay().getWidth();
+		@SuppressWarnings("deprecation")
 		int height = wm.getDefaultDisplay().getHeight();
 		
-		SatelliteMenu smenu = (SatelliteMenu) findViewById(R.id.menu);
-		LinearLayout.LayoutParams params = (LayoutParams) smenu.getLayoutParams();
+		LinearLayout.LayoutParams params = (LayoutParams) menu.getLayoutParams();
 		params.topMargin = height - 1200;
-		smenu.setLayoutParams(params);
+		menu.setLayoutParams(params);
 		
 		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
         items.add(new SatelliteMenuItem(6, R.drawable.ic_1));

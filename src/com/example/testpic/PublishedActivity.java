@@ -22,6 +22,7 @@ import com.another.pooling.R;
 import com.bmob.BmobProFile;
 import com.bmob.btp.callback.UploadBatchListener;
 
+import android.R.integer;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -74,7 +75,7 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 	private EditText address;
 	private EditText detailaddress;
 	LocationManagerProxy mLocationManagerProxy;
-	private String[] savefilename;
+	private String[] savefilename, savefileuri;
 	
 
 	private static String[] names =null;
@@ -144,6 +145,17 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 		});
 		
 	}
+	
+	public void getURL() {
+		if(savefilename.length == 0) {
+			return;
+		} else {
+			for(int i = 0; i < savefilename.length; i++) {
+				savefilename[i] = "http://newfile.codenow.cn:8080/" + BmobProFile.getInstance(PublishedActivity.this).signURL(null, 
+						savefilename[i], "404fbf032078806733460a0b0cd4e6ab", 0, savefileuri[i]);
+			}
+		}
+	}
 
 	public void Init()	
 	{
@@ -203,10 +215,12 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 						// TODO Auto-generated method stub
 						//Toast.makeText(PublishedActivity.this, "success"+arg0, Toast.LENGTH_LONG).show();
 						if(arg0) {
-							Toast.makeText(PublishedActivity.this, "上传完成"+arg1.length, Toast.LENGTH_LONG).show();
+							//Toast.makeText(PublishedActivity.this, "上传完成"+arg1.length, Toast.LENGTH_LONG).show();
 							FileUtils.deleteDir();
 							savefilename = arg1;
-							Toast.makeText(PublishedActivity.this, "上传"+savefilename.length, Toast.LENGTH_LONG).show();
+							savefileuri = arg2;
+							//Toast.makeText(PublishedActivity.this, "上传"+savefilename.length, Toast.LENGTH_LONG).show();
+							getURL();
 							post();
 						}
 					}
@@ -214,8 +228,8 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 					@Override
 					public void onProgress(int curIndex, int curPercent, int total, int totalPercent) {
 						// TODO Auto-generated method stub
-						Toast.makeText(PublishedActivity.this,
-								"正在上传第"+curIndex+"张  进度"+curPercent+"\n总共"+total+"张  进度"+totalPercent, Toast.LENGTH_LONG).show();
+						//Toast.makeText(PublishedActivity.this,
+							//	"正在上传第"+curIndex+"张  进度"+curPercent+"\n总共"+total+"张  进度"+totalPercent, Toast.LENGTH_LONG).show();
 					}
 				});
 			}

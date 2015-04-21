@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.testpic.PublishedActivity;
+import com.yasinyildirim.cardlayout.CardLayoutActivity;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -66,14 +67,22 @@ public class MainActivity extends Activity {
 			public void eventOccured(int id) {
 				Log.i("sat", "Clicked on " + id);
 				switch (id) {
-				case 6:
-					Intent intent6 = new Intent(MainActivity.this, NearResultActivity.class);
-					startActivity(intent6);
+				case 3:
+					Intent intent3 = new Intent(MainActivity.this, NearResultActivity.class);
+					startActivity(intent3);
 					break;
 					
 				case 5:
 					Intent intent5 = new Intent(MainActivity.this, PublishedActivity.class);
 					startActivity(intent5);
+					break;
+					
+				case 6:
+					Intent intent6  = new Intent(MainActivity.this, CitiesActivity.class);
+					Bundle classes = new Bundle();
+					classes.putString("classes", "search");
+					intent6.putExtras(classes);
+					startActivity(intent6);
 					break;
 
 				default:

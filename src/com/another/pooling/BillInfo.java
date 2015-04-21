@@ -2,12 +2,14 @@ package com.another.pooling;
 
 import java.util.ArrayList;
 
-import android.support.annotation.StringDef;
 import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.datatype.BmobDate;
 import cn.bmob.v3.datatype.BmobGeoPoint;
 
 public class BillInfo extends BmobObject {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	String  username;//
 	String deadline;//
 	String describe;//
@@ -32,6 +34,12 @@ public class BillInfo extends BmobObject {
 
 	public String getDeadline() {
 		return deadline;
+	}
+	public String[] getImgfilename() {
+		return imgfilename;
+	}
+	public void setImgfilename(String[] imgfilename) {
+		this.imgfilename = imgfilename;
 	}
 	public void setDeadline(String deadline) {
 		this.deadline = deadline;

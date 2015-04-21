@@ -31,7 +31,7 @@ import android.widget.Toast;
 public class SearchResultActivity extends Activity {
 	private int user_icon[] = null;
 	private String username[] = null;
-	private int image[] = null;
+	private String image[] = null; 
 	private String pre_desString[] = null;
 	private String no[] = null;
 	private String string_dec;
@@ -40,7 +40,7 @@ public class SearchResultActivity extends Activity {
 	private int length = 0;
 
 	private ListView datalist = null; // 定义ListView组件
-	private List<Map<String, String>> list = new ArrayList<Map<String, String>>(); // 定义显示的内容包装
+	private List<Map<String, Object>> list = new ArrayList<Map<String, Object>>(); // 定义显示的内容包装
 	private SimpleAdapter simpleAdapter = null; // 进行数据的转换操作
 	
 	
@@ -68,6 +68,10 @@ public class SearchResultActivity extends Activity {
 		    public void onSuccess(List<BillInfo> object) {
 		        // TODO Auto-generated method stub
 		        //Toast.makeText(NearActivity.this, "查询成功：共" + object.size() + "条数据。"/*  + mPosition.getLatitude() + " " + mPosition.getLongitude()*/, Toast.LENGTH_LONG).show();
+		    	if(object.size() == 0) {
+		    		Toast.makeText(SearchResultActivity.this, "没有找到哦~快去发起拼单吧~", Toast.LENGTH_LONG).show();
+		    		SearchResultActivity.this.finish();
+		    	}
 		    	string_dec= "";
 		    	string_username="";
 		    	string_no="";
@@ -101,7 +105,7 @@ public class SearchResultActivity extends Activity {
 	private void initView() {
 		this.datalist = (ListView) super.findViewById(R.id.datalist); // 取得组件
 		for (int x = 0; x < length; x++) {
-			Map<String, String> map = new HashMap<String, String>(); // 定义Map集合，保存每一行数据
+			Map<String, Object> map = new HashMap<String, Object>(); // 定义Map集合，保存每一行数据
 			map.put("user_icon", String.valueOf(R.drawable.pooling_ic)); // 与data_list.xml中的TextView组加匹配
 			map.put("username", this.username[x]); // 与data_list.xml中的TextView组加匹配
 			map.put("no", this.no[x]);
