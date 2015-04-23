@@ -1,29 +1,22 @@
-package com.another.pooling;
+package com.another.pooling.my;
 
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
-import cn.bmob.v3.datatype.BmobGeoPoint;
+import cn.bmob.v3.BmobUser;
 import cn.bmob.v3.listener.FindListener;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationListener;
-import com.amap.api.location.LocationManagerProxy;
-import com.amap.api.location.LocationProviderProxy;
 
 
 import com.hulefei.android.MySimpleAdapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
@@ -31,14 +24,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.another.pooling.*;
 
-public class NearResultActivity extends Activity  implements AMapLocationListener {
-	private int user_icon[] = null;
+public class MyPublishedResultActivity extends Activity {
+	//private int user_icon[] = null;
 	private String username[] = null;
-	private String image[] = null;
 	private String image_uri[] = null;
 	private List<String> uri;
 	private String pre_desString[] = null;
@@ -50,11 +42,6 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 	private int length = 0;
 
 	private ListView datalist = null; // 定义ListView组件
-	
-	LocationManagerProxy mLocationManagerProxy;
-	private double longitude;
-	private double latitude;
-	private BmobGeoPoint mPosition;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,33 +54,26 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
         .detectLeakedSqlLiteObjects().detectLeakedClosableObjects()  
         .penaltyLog().penaltyDeath().build());  
 		Bmob.initialize(this, "dc417cd048f5197ba699440c13977f34");
-		mPosition = new BmobGeoPoint();
-		
-		getPosition();
-		
-	}
 	
-	private void getPosition() {
-		// TODO Auto-generated method stub
-		mLocationManagerProxy = LocationManagerProxy.getInstance(this);
-	    mLocationManagerProxy.requestLocationData(LocationProviderProxy.AMapNetwork,-1, 15, this);
-		
+		getData();
 	}
+
 	
 	private void getData(){
 		// TODO Auto-generated method stub
 		BmobQuery<BillInfo> bmobQuery = new BmobQuery<BillInfo>();
-		bmobQuery.addWhereNear("position", mPosition);
-		bmobQuery.addWhereEqualTo("classes", 0);
-		bmobQuery.setLimit(100);    //获取最接近用户地点的10条数据
-		bmobQuery.findObjects(NearResultActivity.this, new FindListener<BillInfo>() {
+		BmobUser bmobUser = BmobUser.getCurrentUser(this);
+		String user = bmobUser.getUsername();
+		bmobQuery.addWhereEqualTo("username", user);
+		bmobQuery.setLimit(100);    //获取最接近用户地点的100条数据
+		bmobQuery.findObjects(MyPublishedResultActivity.this, new FindListener<BillInfo>() {
 		    @Override
 		    public void onSuccess(List<BillInfo> object) {
 		        // TODO Auto-generated method stub
 		        //Toast.makeText(NearResultActivity.this, "查询成功：共" + object.size() + "条数据。"/*  + mPosition.getLatitude() + " " + mPosition.getLongitude()*/, Toast.LENGTH_LONG).show();
 		    	if(object.size() == 0) {
-		    		Toast.makeText(NearResultActivity.this, "没有找到哦~快去发起拼单吧~", Toast.LENGTH_LONG).show();
-		    		NearResultActivity.this.finish();
+		    		Toast.makeText(MyPublishedResultActivity.this, "没有找到哦~快去发起拼单吧~", Toast.LENGTH_LONG).show();
+		    		MyPublishedResultActivity.this.finish();
 		    	}
 		    	string_dec= "";
 		    	string_username="";
@@ -128,7 +108,7 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 		    @Override
 		    public void onError(int code, String msg) {
 		        // TODO Auto-generated method stub
-		    	Toast.makeText(NearResultActivity.this, "查询失败。+" + msg, Toast.LENGTH_LONG).show();
+		    	Toast.makeText(MyPublishedResultActivity.this, "查询失败。+" + msg, Toast.LENGTH_LONG).show();
 		    }
 		});
 	}
@@ -151,7 +131,7 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 			HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);  
 			String no = map.get("no");
 			//Toast.makeText(SQLiteCRUDActivity.this, userid +" , "+ name +" , "+ age ,Toast.LENGTH_LONG).show(); 
-			Intent intent = new Intent(NearResultActivity.this, DetailResultActivity.class);
+			Intent intent = new Intent(MyPublishedResultActivity.this, DetailResultActivity.class);
 			Bundle bundle = new Bundle();
 			bundle.putString("objectId", no);
 			intent.putExtras(bundle);
@@ -175,49 +155,6 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 			} 
 			return mylist;
 		}
-
-
-	@Override
-	public void onLocationChanged(Location location) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onLocationChanged(AMapLocation arg0) {
-		// TODO Auto-generated method stub
-		if(arg0 != null && arg0.getAMapException().getErrorCode() == 0) {
-			latitude = arg0.getLatitude();
-			longitude = arg0.getLongitude();
-			mPosition.setLatitude(latitude);
-			mPosition.setLongitude(longitude);
-			//Toast.makeText(NearActivity.this, latitude + " " + longitude, Toast.LENGTH_LONG).show();
-			getData();
-			//Log.e("position", arg0.getLatitude() + " " + arg0.getLongitude());
-		}
-	}
 }
 
 

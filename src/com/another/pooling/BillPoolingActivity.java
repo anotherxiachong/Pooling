@@ -3,6 +3,8 @@ package com.another.pooling;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.another.pooling.my.MyInfoActivity;
+import com.another.pooling.offline.BillPoolingActivityOffLine;
 import com.example.testpic.PublishedActivity;
 
 import android.app.Activity;
@@ -54,6 +56,28 @@ public class BillPoolingActivity extends Activity {
 			
 			public void eventOccured(int id) {
 				Log.i("sat", "Clicked on " + id);
+				switch (id) {
+				case 3:
+					Intent intent3 = new Intent(BillPoolingActivity.this, NearResultActivity.class);
+					startActivity(intent3);
+					break;
+					
+				case 5:
+					Intent intent5 = new Intent(BillPoolingActivity.this, PublishedActivity.class);
+					startActivity(intent5);
+					break;
+					
+				case 6:
+					Intent intent6  = new Intent(BillPoolingActivity.this, CitiesActivity.class);
+					Bundle classes = new Bundle();
+					classes.putString("classes", "search_online");
+					intent6.putExtras(classes);
+					startActivity(intent6);
+					break;
+
+				default:
+					break;
+				}
 			}
 		});
 	}
@@ -61,6 +85,21 @@ public class BillPoolingActivity extends Activity {
 	public void toggleMenu(View view)
 	{
 		mLeftMenu.toggle();
+	}
+	
+	public void EnterBillPoolingOnLine(View view) {
+		Intent intent = new Intent(this, BillPoolingActivity.class);
+		startActivity(intent);
+	}
+	
+	public void EnterBillPoolingOffLine(View view) {
+		Intent intent = new Intent(this, BillPoolingActivityOffLine.class);
+		startActivity(intent);
+	}
+	
+	public void EnterMyInfo(View view) {
+		Intent intent = new Intent(this, MyInfoActivity.class);
+		startActivity(intent);
 	}
 	
 	public void post(View view) {
@@ -81,7 +120,7 @@ public class BillPoolingActivity extends Activity {
 	public void search(View view) {
 		Intent intent  = new Intent(this, CitiesActivity.class);
 		Bundle classes = new Bundle();
-		classes.putString("classes", "search");
+		classes.putString("classes", "search_online");
 		intent.putExtras(classes);
 		startActivity(intent);
 	}

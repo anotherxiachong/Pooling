@@ -1,4 +1,4 @@
-package com.example.testpic;
+package com.another.pooling.offline;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,9 +19,12 @@ import com.another.pooling.BillInfo;
 import com.another.pooling.BillPoolingActivity;
 import com.another.pooling.CitiesActivity;
 import com.another.pooling.R;
-import com.another.pooling.offline.PublishedActivityOffLine;
 import com.bmob.BmobProFile;
 import com.bmob.btp.callback.UploadBatchListener;
+import com.example.testpic.Bimp;
+import com.example.testpic.FileUtils;
+import com.example.testpic.PhotoActivity;
+import com.example.testpic.TestPicActivity;
 
 import android.R.integer;
 import android.annotation.SuppressLint;
@@ -60,7 +63,8 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PublishedActivity extends Activity implements AMapLocationListener
+import com.another.pooling.*;
+public class PublishedActivityOffLine extends Activity implements AMapLocationListener
 {
 
 	private GridView noScrollgridview;
@@ -89,6 +93,7 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 		decribe = (EditText) findViewById(R.id.describe);
 		deadline = (EditText) findViewById(R.id.deadline);
 		link = (EditText) findViewById(R.id.link);
+		link.setVisibility(View.GONE);
 		address = (EditText) findViewById(R.id.address);
 		detailaddress = (EditText) findViewById(R.id.detail_address);
 		mLocationManagerProxy = LocationManagerProxy.getInstance(this);
@@ -99,7 +104,7 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 	public void input(View view) {
 		Intent intent  = new Intent(this, CitiesActivity.class);
 		Bundle classes = new Bundle();
-		classes.putString("classes", "post_online");
+		classes.putString("classes", "post_offline");
 		intent.putExtras(classes);
 		startActivityForResult(intent, CITY_SELECT);
 	}
@@ -127,25 +132,25 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 		mBillInfo.setLink(linkString);
 		mBillInfo.setAddress(addressString);
 		mBillInfo.setDetailaddress(detailAddresString);
-		mBillInfo.setClasses(0);
+		mBillInfo.setClasses(1);
 		mBillInfo.setPosition(mBmobGeoPoint);
 		
 		mBillInfo.addAll("imgfilename", Arrays.asList(savefilename));
 		mBillInfo.addUnique("followman", Arrays.asList(followmanString));
 		
-		mBillInfo.save(PublishedActivity.this, new SaveListener() {
+		mBillInfo.save(PublishedActivityOffLine.this, new SaveListener() {
 			
 			@Override
 			public void onSuccess() {
 				// TODO Auto-generated method stub
-				Toast.makeText(PublishedActivity.this, "发布成功", Toast.LENGTH_LONG).show();
-				PublishedActivity.this.finish();
+				Toast.makeText(PublishedActivityOffLine.this, "发布成功", Toast.LENGTH_LONG).show();
+				PublishedActivityOffLine.this.finish();
 			}
 			
 			@Override
 			public void onFailure(int arg0, String arg1) {
 				// TODO Auto-generated method stub
-				Toast.makeText(PublishedActivity.this, "请检查网络" + arg1, Toast.LENGTH_LONG).show();
+				Toast.makeText(PublishedActivityOffLine.this, "请检查网络" + arg1, Toast.LENGTH_LONG).show();
 			}
 		});
 		
@@ -156,7 +161,7 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 			return;
 		} else {
 			for(int i = 0; i < savefilename.length; i++) {
-				savefilename[i] =/* "http://newfile.codenow.cn:8080/" + */BmobProFile.getInstance(PublishedActivity.this).signURL(savefilename[i], savefileuri[i],
+				savefilename[i] =/* "http://newfile.codenow.cn:8080/" + */BmobProFile.getInstance(PublishedActivityOffLine.this).signURL(savefilename[i], savefileuri[i],
 						 "404fbf032078806733460a0b0cd4e6ab", 0, null);
 			}
 		}
@@ -177,10 +182,10 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 			{
 				if (arg2 == Bimp.bmp.size())
 				{
-					new PopupWindows(PublishedActivity.this, noScrollgridview);
+					new PopupWindows(PublishedActivityOffLine.this, noScrollgridview);
 				} else
 				{
-					Intent intent = new Intent(PublishedActivity.this,
+					Intent intent = new Intent(PublishedActivityOffLine.this,
 							PhotoActivity.class);
 					intent.putExtra("ID", arg2);
 					startActivity(intent);
@@ -206,13 +211,13 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 				// 高清的压缩过的 bmp 对象 都在 Bimp.bmp里面
 				// 完成上传服务器后 .........
 				names = list.toArray(new String[1]);
-				BmobProFile.getInstance(PublishedActivity.this).uploadBatch(names, 
+				BmobProFile.getInstance(PublishedActivityOffLine.this).uploadBatch(names, 
 						new UploadBatchListener() {
 					
 					@Override
 					public void onError(int arg0, String arg1) {
 						// TODO Auto-generated method stub
-						Toast.makeText(PublishedActivity.this, "请检查网络" + arg1, Toast.LENGTH_LONG).show();
+						Toast.makeText(PublishedActivityOffLine.this, "请检查网络" + arg1, Toast.LENGTH_LONG).show();
 					}
 					
 					@Override
@@ -462,10 +467,10 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 			{
 				public void onClick(View v)
 				{
-					Intent intent = new Intent(PublishedActivity.this,
+					Intent intent = new Intent(PublishedActivityOffLine.this,
 							TestPicActivity.class);
 					Bundle bundle = new Bundle();
-					bundle.putString("class", "online");
+					bundle.putString("class", "offline");
 					intent.putExtras(bundle);
 					startActivity(intent);
 					dismiss();
@@ -508,7 +513,7 @@ public class PublishedActivity extends Activity implements AMapLocationListener
 			startActivityForResult(openCameraIntent, TAKE_PICTURE);
 		}
 		else{ 
-			Toast.makeText(PublishedActivity.this, "没有储存卡",Toast.LENGTH_LONG).show(); 
+			Toast.makeText(PublishedActivityOffLine.this, "没有储存卡",Toast.LENGTH_LONG).show(); 
 			} 
 	}
 

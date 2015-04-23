@@ -1,24 +1,22 @@
-package com.another.pooling;
+package com.another.pooling.offline;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.another.pooling.my.MyInfoActivity;
-import com.another.pooling.offline.BillPoolingActivityOffLine;
+import com.another.pooling.BillPoolingActivity;
+import com.another.pooling.CitiesActivity;
+import com.another.pooling.MainActivity;
+import com.another.pooling.NearResultActivity;
+import com.another.pooling.SlidingMenu;
 import com.example.testpic.PublishedActivity;
-import com.yasinyildirim.cardlayout.CardLayoutActivity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.ext.SatelliteMenu;
@@ -26,33 +24,27 @@ import android.view.ext.SatelliteMenuItem;
 import android.view.ext.SatelliteMenu.SateliteClickedListener;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.TextView;
-import android.widget.Toast;
 
-public class MainActivity extends Activity {
+import com.another.pooling.*;
+import com.another.pooling.my.MyInfoActivity;
+public class BillPoolingActivityOffLine extends Activity {
 	
-	private SlidingMenu mLeftMenu; 
-	private TextView onOff;
-	boolean isExit;  
+	private SlidingMenu mLeftMenu ; 
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_main);
-		
 		 SatelliteMenu menu = (SatelliteMenu) findViewById(R.id.menu);
-		
-		mLeftMenu = (SlidingMenu) findViewById(R.id.id_menu);
-		
 		WindowManager wm = this.getWindowManager();
-		int width = wm.getDefaultDisplay().getWidth();
+		@SuppressWarnings("deprecation")
 		int height = wm.getDefaultDisplay().getHeight();
 		
-		SatelliteMenu smenu = (SatelliteMenu) findViewById(R.id.menu);
-		LinearLayout.LayoutParams params = (LayoutParams) smenu.getLayoutParams();
+		LinearLayout.LayoutParams params = (LayoutParams) menu.getLayoutParams();
 		params.topMargin = height - 1200;
-		smenu.setLayoutParams(params);
+		menu.setLayoutParams(params);
 		
 		List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
         items.add(new SatelliteMenuItem(6, R.drawable.ic_1));
@@ -70,19 +62,19 @@ public class MainActivity extends Activity {
 				Log.i("sat", "Clicked on " + id);
 				switch (id) {
 				case 3:
-					Intent intent3 = new Intent(MainActivity.this, NearResultActivity.class);
+					Intent intent3 = new Intent(BillPoolingActivityOffLine.this, NearResultActivityOffLine.class);
 					startActivity(intent3);
 					break;
 					
 				case 5:
-					Intent intent5 = new Intent(MainActivity.this, PublishedActivity.class);
+					Intent intent5 = new Intent(BillPoolingActivityOffLine.this, PublishedActivityOffLine.class);
 					startActivity(intent5);
 					break;
 					
 				case 6:
-					Intent intent6  = new Intent(MainActivity.this, CitiesActivity.class);
+					Intent intent6  = new Intent(BillPoolingActivityOffLine.this, CitiesActivity.class);
 					Bundle classes = new Bundle();
-					classes.putString("classes", "search");
+					classes.putString("classes", "search_offline");
 					intent6.putExtras(classes);
 					startActivity(intent6);
 					break;
@@ -92,31 +84,21 @@ public class MainActivity extends Activity {
 				}
 			}
 		});
-        /**
-        onOff = (TextView) findViewById(R.id.activity_selectimg_switch);
-        onOff.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				String content = "";
-				content = onOff.getText().toString();
-				Intent intent = new Intent(MainActivity.this, NearResultActivity.class);
-				if(content.equals("线上")) {
-					onOff.setText("线下");
-					startActivity(intent);
-				} else {
-					onOff.setText("线上");
-					startActivity(intent);
-				}
-			}
-		});
-		*/
 	}
 	
 	public void toggleMenu(View view)
 	{
 		mLeftMenu.toggle();
+	}
+	
+	public void post(View view) {
+		Intent intent = new Intent(this, PublishedActivity.class);
+		//Bundle address = new Bundle();
+		//address.putString("address", "");
+		//intent.putExtras(address);
+		startActivity(intent);
+		//Intent intent = new Intent(this, PublishedActivity.class);
+		//startActivityForResult(intent, RESULT_OK);
 	}
 	
 	public void EnterBillPoolingOnLine(View view) {
@@ -133,42 +115,24 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, MyInfoActivity.class);
 		startActivity(intent);
 	}
-
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		if (keyCode == KeyEvent.KEYCODE_BACK) {  
-			exit();  
-			return false;  
-        } else {  
-            return super.onKeyDown(keyCode, event);  
-        } 
+	
+	public void near(View view) {
+		Intent intent = new Intent(this, NearResultActivity.class);
+		startActivity(intent);
 	}
 	
-	public void exit(){  
-        if (!isExit) {  
-            isExit = true;  
-            Toast.makeText(getApplicationContext(), "再按一次退出程序", Toast.LENGTH_SHORT).show();  
-            mHandler.sendEmptyMessageDelayed(0, 2000);  
-        } else {  
-            finish(); 
-            System.exit(0);  
-        }  
-    }  
-	
-	Handler mHandler = new Handler() {  
-        @Override  
-        public void handleMessage(Message msg) {  
-            // TODO Auto-generated method stub   
-            super.handleMessage(msg);  
-            isExit = false;  
-        }  
-    };  
+	public void search(View view) {
+		Intent intent  = new Intent(this, CitiesActivity.class);
+		Bundle classes = new Bundle();
+		classes.putString("classes", "search_offline");
+		intent.putExtras(classes);
+		startActivity(intent);
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.bill_pooling, menu);
 		return true;
 	}
 

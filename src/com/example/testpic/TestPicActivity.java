@@ -90,6 +90,13 @@ public class TestPicActivity extends Activity
 						ImageGridActivity.class);
 				intent.putExtra(TestPicActivity.EXTRA_IMAGE_LIST,
 						(Serializable) dataList.get(position).imageList);
+				Bundle bundle = new Bundle();
+				if(TestPicActivity.this.getIntent().getExtras().getString("class").equals("online")) {
+					bundle.putString("classes", "online");
+				} else {
+					bundle.putString("classes", "offline");
+				}
+				intent.putExtras(bundle);
 				startActivity(intent);
 				finish();
 			}

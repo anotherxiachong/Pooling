@@ -1,4 +1,4 @@
-package com.another.pooling;
+package com.another.pooling.offline;
 
 
 import java.io.IOException;
@@ -33,9 +33,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import com.another.pooling.*;
 
-
-public class NearResultActivity extends Activity  implements AMapLocationListener {
+public class NearResultActivityOffLine extends Activity  implements AMapLocationListener {
 	private int user_icon[] = null;
 	private String username[] = null;
 	private String image[] = null;
@@ -84,16 +84,16 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 		// TODO Auto-generated method stub
 		BmobQuery<BillInfo> bmobQuery = new BmobQuery<BillInfo>();
 		bmobQuery.addWhereNear("position", mPosition);
-		bmobQuery.addWhereEqualTo("classes", 0);
+		bmobQuery.addWhereEqualTo("classes", 1);
 		bmobQuery.setLimit(100);    //获取最接近用户地点的10条数据
-		bmobQuery.findObjects(NearResultActivity.this, new FindListener<BillInfo>() {
+		bmobQuery.findObjects(NearResultActivityOffLine.this, new FindListener<BillInfo>() {
 		    @Override
 		    public void onSuccess(List<BillInfo> object) {
 		        // TODO Auto-generated method stub
 		        //Toast.makeText(NearResultActivity.this, "查询成功：共" + object.size() + "条数据。"/*  + mPosition.getLatitude() + " " + mPosition.getLongitude()*/, Toast.LENGTH_LONG).show();
 		    	if(object.size() == 0) {
-		    		Toast.makeText(NearResultActivity.this, "没有找到哦~快去发起拼单吧~", Toast.LENGTH_LONG).show();
-		    		NearResultActivity.this.finish();
+		    		Toast.makeText(NearResultActivityOffLine.this, "没有找到哦~快去发起拼单吧~", Toast.LENGTH_LONG).show();
+		    		NearResultActivityOffLine.this.finish();
 		    	}
 		    	string_dec= "";
 		    	string_username="";
@@ -128,7 +128,7 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 		    @Override
 		    public void onError(int code, String msg) {
 		        // TODO Auto-generated method stub
-		    	Toast.makeText(NearResultActivity.this, "查询失败。+" + msg, Toast.LENGTH_LONG).show();
+		    	Toast.makeText(NearResultActivityOffLine.this, "查询失败。+" + msg, Toast.LENGTH_LONG).show();
 		    }
 		});
 	}
@@ -151,7 +151,7 @@ public class NearResultActivity extends Activity  implements AMapLocationListene
 			HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);  
 			String no = map.get("no");
 			//Toast.makeText(SQLiteCRUDActivity.this, userid +" , "+ name +" , "+ age ,Toast.LENGTH_LONG).show(); 
-			Intent intent = new Intent(NearResultActivity.this, DetailResultActivity.class);
+			Intent intent = new Intent(NearResultActivityOffLine.this, DetailResultActivityOffLine.class);
 			Bundle bundle = new Bundle();
 			bundle.putString("objectId", no);
 			intent.putExtras(bundle);

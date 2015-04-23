@@ -20,10 +20,14 @@
     <string name="title_activity_search_result">SearchResultActivity</string>
     <string name="title_activity_near_result">NearResultActivity</string>
     <string name="title_activity_detail_result">DetailResultActivity</string>
-     <string name="list_item_left_button">跟单</string>
+    <string name="list_item_left_button">分享</string>
     <string name="list_item_right_button">点赞</string>
     <string name="action_about">About</string>
     <string name="dialog_message">Created by Yasin Yildirim - 2014</string>
     <string name="dialog_ok">OK</string>
+    <string name="title_activity_my_info">MyInfoActivity</string>
+    <string name="title_activity_my_follow_result">MyFollowResultActivity</string>
+    <string name="title_activity_my_published_result">MyPublishedResultActivity</string>
+    <string name="title_activity_my_tel">MyTelActivity</string>
 
 </resources>

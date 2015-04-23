@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.another.pooling.R;
+import com.another.pooling.offline.PublishedActivityOffLine;
 import com.example.testpic.ImageGridAdapter.TextCallback;
 
 import android.app.Activity;
@@ -81,8 +82,14 @@ public class ImageGridActivity extends Activity
 
 				if (Bimp.act_bool)
 				{
-					Intent intent = new Intent(ImageGridActivity.this,
-							PublishedActivity.class);
+					Intent intent = null;
+					if(ImageGridActivity.this.getIntent().getExtras().getString("classes").equals("online")) {
+						intent = new Intent(ImageGridActivity.this,
+								PublishedActivity.class);
+					} else {
+						intent = new Intent(ImageGridActivity.this,
+								PublishedActivityOffLine.class);
+					}
 					startActivity(intent);
 					Bimp.act_bool = false;
 				}

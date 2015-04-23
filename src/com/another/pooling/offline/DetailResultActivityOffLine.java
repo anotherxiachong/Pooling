@@ -1,8 +1,8 @@
-package com.another.pooling;
+package com.another.pooling.offline;
 
 import java.util.List;
 
-import com.another.pooling.offline.DetailResultActivityOffLine;
+import com.another.pooling.*;
 
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class DetailResultActivity extends Activity {
+public class DetailResultActivityOffLine extends Activity {
 
 	private String no;
 	private TextView r_username;
@@ -40,6 +40,7 @@ public class DetailResultActivity extends Activity {
 		r_online_address = (EditText) findViewById(R.id.r_online_address);
 		r_offline_address = (EditText) findViewById(R.id.r_offline_address);
 		r_link = (EditText) findViewById(R.id.r_link);
+		r_link.setVisibility(View.GONE);
 		
 		getData();
 	}
@@ -49,7 +50,7 @@ public class DetailResultActivity extends Activity {
 		BmobQuery<BillInfo> bmobQuery = new BmobQuery<BillInfo>();
 		bmobQuery.addWhereEqualTo("objectId", no);
 		bmobQuery.setLimit(1);   
-		bmobQuery.findObjects(DetailResultActivity.this, new FindListener<BillInfo>() {
+		bmobQuery.findObjects(DetailResultActivityOffLine.this, new FindListener<BillInfo>() {
 		    @Override
 		    public void onSuccess(List<BillInfo> object) {
 		        // TODO Auto-generated method stub
@@ -66,7 +67,7 @@ public class DetailResultActivity extends Activity {
 		    @Override
 		    public void onError(int code, String msg) {
 		        // TODO Auto-generated method stub
-		    	Toast.makeText(DetailResultActivity.this, "查询失败。+" + msg, Toast.LENGTH_LONG).show();
+		    	Toast.makeText(DetailResultActivityOffLine.this, "查询失败。+" + msg, Toast.LENGTH_LONG).show();
 		    }
 		});
 	}
@@ -75,20 +76,36 @@ public class DetailResultActivity extends Activity {
 		BillInfo billInfo = new BillInfo();
 		BmobUser bmobUser = BmobUser.getCurrentUser(this);
 		String username = bmobUser.getUsername();
-		billInfo.setObjectId(no);
-		billInfo.addUnique("followman", username);
-		billInfo.update(DetailResultActivity.this, new UpdateListener() {
+		billInfo.setClasses(1);
+		billInfo.update(DetailResultActivityOffLine.this, no, new UpdateListener() {
 			
 			@Override
 			public void onSuccess() {
 				// TODO Auto-generated method stub
-				Toast.makeText(DetailResultActivity.this, "跟单成功", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(DetailResultActivityOffLine.this, "跟单成功", Toast.LENGTH_SHORT).show();
 			}
 			
 			@Override
 			public void onFailure(int arg0, String arg1) {
 				// TODO Auto-generated method stub
-				Toast.makeText(DetailResultActivity.this, "请检查网络", Toast.LENGTH_SHORT).show();
+				//Toast.makeText(DetailResultActivityOffLine.this, "请检查网络", Toast.LENGTH_SHORT).show();
+			}
+		});
+		
+		billInfo.setObjectId(no);
+		billInfo.addUnique("followman", username);
+		billInfo.update(DetailResultActivityOffLine.this, new UpdateListener() {
+			
+			@Override
+			public void onSuccess() {
+				// TODO Auto-generated method stub
+				Toast.makeText(DetailResultActivityOffLine.this, "跟单成功", Toast.LENGTH_SHORT).show();
+			}
+			
+			@Override
+			public void onFailure(int arg0, String arg1) {
+				// TODO Auto-generated method stub
+				Toast.makeText(DetailResultActivityOffLine.this, "请检查网络", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}

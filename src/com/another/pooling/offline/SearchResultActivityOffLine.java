@@ -1,4 +1,4 @@
-package com.another.pooling;
+package com.another.pooling.offline;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,9 +26,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import com.another.pooling.*;
 
-
-public class SearchResultActivity extends Activity {
+public class SearchResultActivityOffLine extends Activity {
 	private int user_icon[] = null;
 	private String username[] = null;
 	private String image[] = null; 
@@ -62,16 +62,16 @@ public class SearchResultActivity extends Activity {
 		// TODO Auto-generated method stub
 		BmobQuery<BillInfo> bmobQuery = new BmobQuery<BillInfo>();
 		bmobQuery.addWhereEqualTo("address", address);
-		bmobQuery.addWhereEqualTo("classes", 0);
+		bmobQuery.addWhereEqualTo("classes", 1);
 		bmobQuery.setLimit(100);    //获取最接近用户地点的10条数据
-		bmobQuery.findObjects(SearchResultActivity.this, new FindListener<BillInfo>() {
+		bmobQuery.findObjects(SearchResultActivityOffLine.this, new FindListener<BillInfo>() {
 		    @Override
 		    public void onSuccess(List<BillInfo> object) {
 		        // TODO Auto-generated method stub
 		        //Toast.makeText(NearActivity.this, "查询成功：共" + object.size() + "条数据。"/*  + mPosition.getLatitude() + " " + mPosition.getLongitude()*/, Toast.LENGTH_LONG).show();
 		    	if(object.size() == 0) {
-		    		Toast.makeText(SearchResultActivity.this, "没有找到哦~快去发起拼单吧~", Toast.LENGTH_LONG).show();
-		    		SearchResultActivity.this.finish();
+		    		Toast.makeText(SearchResultActivityOffLine.this, "没有找到哦~快去发起拼单吧~", Toast.LENGTH_LONG).show();
+		    		SearchResultActivityOffLine.this.finish();
 		    	}
 		    	string_dec= "";
 		    	string_username="";
@@ -95,7 +95,7 @@ public class SearchResultActivity extends Activity {
 		    @Override
 		    public void onError(int code, String msg) {
 		        // TODO Auto-generated method stub
-		    	Toast.makeText(SearchResultActivity.this, "查询失败。+" + msg, Toast.LENGTH_LONG).show();
+		    	Toast.makeText(SearchResultActivityOffLine.this, "查询失败。+" + msg, Toast.LENGTH_LONG).show();
 		    }
 		});
 	}
@@ -130,7 +130,7 @@ public class SearchResultActivity extends Activity {
 				HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);  
 				String no = map.get("no");
 				//Toast.makeText(SQLiteCRUDActivity.this, userid +" , "+ name +" , "+ age ,Toast.LENGTH_LONG).show(); 
-				Intent intent = new Intent(SearchResultActivity.this, DetailResultActivity.class);
+				Intent intent = new Intent(SearchResultActivityOffLine.this, DetailResultActivity.class);
 				Bundle bundle = new Bundle();
 				bundle.putString("objectId", no);
 				intent.putExtras(bundle);

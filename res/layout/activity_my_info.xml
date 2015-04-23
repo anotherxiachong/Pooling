@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:hyman="http://schemas.android.com/apk/res/com.another.pooling"
+    xmlns:sat="http://schemas.android.com/apk/res/com.another.pooling"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.another.pooling.SlidingMenu
+        android:id="@+id/id_menu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5BE33"
+        hyman:rightPadding="80dp" >
+        <LinearLayout 
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            
+            <include layout="@layout/left_menu"/>
+            
+            <LinearLayout 
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"  
+                android:background="#FFFFFF">
+                
+                <TextView 
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:text="我的"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" 
+                    android:gravity="center"
+                    android:background="#ff495a"/>
+                
+                       <android.view.ext.SatelliteMenu
+                            android:id="@+id/menu"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="8dp"
+                             sat:satelliteDistance="170dp"
+                             sat:mainImage="@drawable/pooling_ic"
+                             sat:totalSpacingDegree="90"
+                             sat:closeOnClick="true"
+                             sat:expandDuration="500"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.another.pooling.SlidingMenu>
+
+</RelativeLayout>

@@ -9,6 +9,10 @@ import java.util.List;
 
 
 
+
+
+import com.another.pooling.offline.PublishedActivityOffLine;
+import com.another.pooling.offline.SearchResultActivityOffLine;
 import com.example.testpic.PublishedActivity;
 
 import kankan.wheel.widget.OnWheelChangedListener;
@@ -101,15 +105,29 @@ public class CitiesActivity extends Activity implements OnWheelChangedListener
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				if(classes.equals("post")) {
+				if(classes.equals("post_online")) {
 					Intent intent = new Intent(CitiesActivity.this, PublishedActivity.class);
 					Bundle address = new Bundle();
 					address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
 					intent.putExtras(address);
 					setResult(3, intent);
 					finish();
-				} else if(classes.equals("search")) {
+				} else if(classes.equals("post_offline")) {
+					Intent intent = new Intent(CitiesActivity.this, PublishedActivityOffLine.class);
+					Bundle address = new Bundle();
+					address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
+					intent.putExtras(address);
+					startActivity(intent);
+					finish();
+				}else if(classes.equals("search_online")) {
 					Intent intent = new Intent(CitiesActivity.this, SearchResultActivity.class);
+					Bundle address = new Bundle();
+					address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
+					intent.putExtras(address);
+					startActivity(intent);
+					finish();
+				} else if(classes.equals("search_offline")) {
+					Intent intent = new Intent(CitiesActivity.this, SearchResultActivityOffLine.class);
 					Bundle address = new Bundle();
 					address.putString("address", mCurrentProviceName + mCurrentCityName + mCurrentAreaName + mCurrentStreetName);
 					intent.putExtras(address);
